@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenStreetMap з мітками</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        // Ініціалізація карти
+        var map = L.map('map').setView([50.4501, 30.5234], 12);
+
+        // Додавання карти OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Додавання міток
+        var markers = [
+            { lat: 50.4501, lng: 30.5234, title: "Київ" },
+            { lat: 50.4547, lng: 30.5038, title: "Хрещатик" },
+            { lat: 50.4285, lng: 30.5361, title: "Печерськ" }
+        ];
+
+        markers.forEach(function(marker) {
+            L.marker([marker.lat, marker.lng])
+                .addTo(map)
+                .bindPopup(`<h3>${marker.title}</h3>`);
+        });
+    </script>
+</body>
+</html>
